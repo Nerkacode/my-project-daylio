@@ -1,32 +1,51 @@
 <template>
   <div class="app-mymood">
+    <h2>So, how was your day?</h2>
+    <span>{{ date }}</span>
+
     <div>
-      <h2>So, how was your day?</h2>
-      <span>{{ new Date().toString().slice(0, 15) }}</span>
-    </div>
-    <div>
-      <button type="button">
-        <span role="img" aria-label="Smile">😈</span>
-      </button>
-      <button type="button">
-        <span role="img" aria-label="Smile">😃</span>
-      </button>
-      <button type="button">
-        <span role="img" aria-label="Neutral">😐</span>
-      </button>
-      <button type="button">
-        <span role="img" aria-label="Sad">😡</span>
-      </button>
-      <button type="button">
-        <span role="img" aria-label="Sad">👻</span>
-      </button>
+      <router-link to="/myactivities">
+        <button type="button" @click="addMood('😈')">
+          <span role="img" aria-label="Smile">😈</span>
+        </button>
+        <button type="button">
+          <span role="img" aria-label="Smile">😃</span>
+        </button>
+        <button type="button">
+          <span role="img" aria-label="Neutral">😐</span>
+        </button>
+        <button type="button">
+          <span role="img" aria-label="Sad">😡</span>
+        </button>
+        <button type="button">
+          <span role="img" aria-label="Sad">👻</span>
+        </button>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "AppMyMood"
+  name: "AppMyMood",
+  data() {
+    return {
+      mood: {
+        type: ""
+      }
+    };
+  },
+  methods: {
+    addMood(moodIcon) {
+      this.mood.type = moodIcon;
+      console.log(this.mood);
+    }
+  },
+  computed: {
+    date() {
+      return new Date().toString().slice(0, 15);
+    }
+  }
 };
 </script>
 
@@ -41,18 +60,20 @@ export default {
     margin: 0;
   }
   button {
-    background-color: #aaf0d1;
+    background-color: whitesmoke;
     cursor: pointer;
     outline: none;
-    margin: 0;
+    margin-top: 50px;
     padding: 0;
+    width: 75px;
     border-radius: 50%;
-    border: 1px solid #fff;
-    font-size: 60px;
+    border: 1px solid whitesmoke;
+    font-size: 55px;
+    color: #aeaaf0;
     &:hover {
-      color: black;
-      transform: rotate(180deg);
-      transition: 300ms;
+      color: #ff5733;
+      transform: scale(1.1, 1.1);
+      transition: 400ms;
     }
   }
 }

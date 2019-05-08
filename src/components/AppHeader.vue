@@ -46,8 +46,16 @@ export default {
 
   &__logo,
   &__login {
-    h3 {
+    a:link,
+    a:visited,
+    a:active {
       cursor: pointer;
+      text-decoration: none;
+      color: black;
+    }
+    a:hover {
+      color: whitesmoke;
+      transition: 200ms;
     }
   }
 }

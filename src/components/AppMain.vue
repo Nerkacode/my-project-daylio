@@ -1,7 +1,7 @@
 <template>
   <div class="app-main">
     <h2>Add new myMood event?</h2>
-    <span>{{ new Date().toString().slice(0, 15) }}</span>
+    <span>{{ date }}</span>
     <div>
       <router-link to="/mymood">
         <button type="button">+</button>
@@ -12,7 +12,12 @@
 
 <script>
 export default {
-  name: "AppMain"
+  name: "AppMain",
+  computed: {
+    date() {
+      return new Date().toString().slice(0, 15);
+    }
+  }
 };
 </script>
 
@@ -37,7 +42,6 @@ export default {
     border: 1px solid #fff;
     font-size: 60px;
     &:hover {
-      color: black;
       transform: rotate(180deg);
       transition: 300ms;
     }
