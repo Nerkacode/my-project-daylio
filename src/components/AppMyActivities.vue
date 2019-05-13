@@ -1,60 +1,86 @@
 <template>
   <div class="app-myactivities">
     <div class="mood">
-      <span>{{ test }}</span>
+      <span>{{ getMood }}</span>
+      <!-- <span v-for="activity in getActivity">{{ activity }}</span> -->
     </div>
     <h2>myActivities</h2>
     <span>{{ date }}</span>
     <div>
-      <button type="button">
-        <span role="img" aria-label="Smile">🏀</span>
+      <button
+        type="button"
+        @click="addActivity('🏀'), $event.target.classList.toggle('activities')"
+      >
+        <span role="img" aria-label="Basketball">🏀</span>
       </button>
-      <button type="button">
-        <span role="img" aria-label="Smile">🎧</span>
+      <button
+        type="button"
+        @click="addActivity('🎧'), $event.target.classList.toggle('activities')"
+      >
+        <span role="img" aria-label="Headphones">🎧</span>
       </button>
-      <button type="button">
-        <span role="img" aria-label="Neutral">🎮</span>
+      <button
+        type="button"
+        @click="addActivity('🎮'), $event.target.classList.toggle('activities')"
+      >
+        <span role="img" aria-label="Joystic">🎮</span>
       </button>
-      <button type="button">
-        <span role="img" aria-label="Sad">🏊</span>
+      <button
+        type="button"
+        @click="addActivity('🏊'), $event.target.classList.toggle('activities')"
+      >
+        <span role="img" aria-label="Swimer">🏊</span>
       </button>
-      <button type="button">
-        <span role="img" aria-label="Sad">☕</span>
+      <button type="button" @click="addActivity('☕'), $event.target.classList.toggle('activities')">
+        <span role="img" aria-label="Cup">☕</span>
       </button>
-      <button type="button">
-        <span role="img" aria-label="Sad">📖</span>
+      <button
+        type="button"
+        @click="addActivity('📖'), $event.target.classList.toggle('activities')"
+      >
+        <span role="img" aria-label="Book">📖</span>
       </button>
-      <button type="button">
-        <span role="img" aria-label="Sad">🍏</span>
+      <button
+        type="button"
+        @click="addActivity('🍏'), $event.target.classList.toggle('activities')"
+      >
+        <span role="img" aria-label="Apple">🍏</span>
       </button>
     </div>
     <div>
       <input placeholder="Add Note...">
     </div>
     <div>
-      <button type="button">
-        <span role="img" aria-label="Smile">✔️</span>
-      </button>
+      <router-link to="/summary">
+        <button type="button">
+          <span role="img" aria-label="Smile">✔️</span>
+        </button>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
-import AppMyMood from "./AppMyMood";
-
+import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
   name: "AppMyActivities",
-  computed: {
-    date() {
-      return new Date().toString().slice(0, 15);
-    },
-    test() {
-      console.log(AppMyMood);
-      return AppMyMood.name;
+  methods: {
+    ...mapActions({
+      addActivity2: "addActivity"
+    }),
+    addActivity(activityIcon) {
+      this.addActivity2(activityIcon);
     }
   },
-  components: {
-    AppMyMood
+  computed: {
+    ...mapGetters({
+      getMood: "getMood",
+      getActivity: "getActivity"
+    }),
+    date() {
+      return new Date().toString().slice(0, 15);
+    }
   }
 };
 </script>
@@ -81,7 +107,6 @@ export default {
     font-size: 55px;
     color: #aeaaf0;
     &:hover {
-      color: #ff5733;
       transform: scale(1.1, 1.1);
       transition: 400ms;
     }
@@ -96,8 +121,11 @@ export default {
     border: 1px solid grey;
   }
   .mood span {
-    font-size: 20px;
-    color: red;
+    font-size: 55px;
+    color: #aeaaf0;
+  }
+  .activities {
+    color: #ff5733;
   }
 }
 </style>

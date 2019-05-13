@@ -8,16 +8,16 @@
         <button type="button" @click="addMood('😈')">
           <span role="img" aria-label="Smile">😈</span>
         </button>
-        <button type="button">
+        <button type="button" @click="addMood('😃')">
           <span role="img" aria-label="Smile">😃</span>
         </button>
-        <button type="button">
+        <button type="button" @click="addMood('😐')">
           <span role="img" aria-label="Neutral">😐</span>
         </button>
-        <button type="button">
+        <button type="button" @click="addMood('😡')">
           <span role="img" aria-label="Sad">😡</span>
         </button>
-        <button type="button">
+        <button type="button" @click="addMood('👻')">
           <span role="img" aria-label="Sad">👻</span>
         </button>
       </router-link>
@@ -26,19 +26,15 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "AppMyMood",
-  data() {
-    return {
-      mood: {
-        type: ""
-      }
-    };
-  },
   methods: {
+    ...mapActions({
+      addMood2: "addMood"
+    }),
     addMood(moodIcon) {
-      this.mood.type = moodIcon;
-      console.log(this.mood);
+      this.addMood2(moodIcon);
     }
   },
   computed: {
