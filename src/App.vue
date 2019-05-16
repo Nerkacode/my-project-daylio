@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <AppHeader msg="#myMood"/>
+    <AppHeader msg="addEvent"/>
     <router-view></router-view>
     <AppFooter/>
   </div>

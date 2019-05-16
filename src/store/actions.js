@@ -4,5 +4,8 @@ export default {
   },
   addActivity ({ commit }, activity) {
     commit('setActivity', activity)
+  },
+  inputvalue ({ commit }, input) {
+    commit('setInputvalue', input)
   }
 }

@@ -8,6 +8,7 @@ import AppMain from './components/AppMain'
 import AppMyMood from './components/AppMyMood'
 import AppMyActivities from './components/AppMyActivities'
 import AppDone from './components/AppDone'
+import AppMoodsCounter from './components/AppMoodsCounter'
 import '@/assets/scss/app.scss'
 
 Vue.config.productionTip = process.env.NODE_ENV === 'production'
@@ -22,7 +23,8 @@ const router = new VueRouter({
     { path: '/login', name: 'login', component: AppLogin },
     { path: '/mymood', name: 'mymood', component: AppMyMood },
     { path: '/myactivities', name: 'myactivities', component: AppMyActivities },
-    { path: '/summary', name: 'summary', component: AppDone }
+    { path: '/summary', name: 'summary', component: AppDone },
+    { path: '/moodscounter', name: 'moodscounter', component: AppMoodsCounter }
   ]
 })
 

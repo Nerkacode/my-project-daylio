@@ -5,6 +5,12 @@
         <router-link to="/">
           <h3>{{ msg }}</h3>
         </router-link>
+        <router-link to="/summary">
+          <h3>myMood</h3>
+        </router-link>
+        <router-link to="/moodscounter">
+          <h3>moodsCounter</h3>
+        </router-link>
       </div>
 
       <div class="app-header__login">
@@ -17,6 +23,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "AppHeader",
   props: {
@@ -46,6 +53,12 @@ export default {
 
   &__logo,
   &__login {
+    display: flex;
+    flex-direction: row;
+    h3 {
+      margin: 0 15px;
+    }
+
     a:link,
     a:visited,
     a:active {

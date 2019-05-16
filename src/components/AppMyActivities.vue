@@ -9,50 +9,60 @@
     <div>
       <button
         type="button"
-        @click="addActivity('🏀'), $event.target.classList.toggle('activities')"
+        :class="[isActive1 ? 'active': 'inActive']"
+        @click="addActivity('🏀'), changeColor('isActive1')"
       >
         <span role="img" aria-label="Basketball">🏀</span>
       </button>
       <button
         type="button"
-        @click="addActivity('🎧'), $event.target.classList.toggle('activities')"
+        :class="[isActive2 ? 'active': 'inActive']"
+        @click="addActivity('🎧'), changeColor('isActive2')"
       >
         <span role="img" aria-label="Headphones">🎧</span>
       </button>
       <button
         type="button"
-        @click="addActivity('🎮'), $event.target.classList.toggle('activities')"
+        :class="[isActive3 ? 'active': 'inActive']"
+        @click="addActivity('🎮'), changeColor('isActive3')"
       >
         <span role="img" aria-label="Joystic">🎮</span>
       </button>
       <button
         type="button"
-        @click="addActivity('🏊'), $event.target.classList.toggle('activities')"
+        :class="[isActive4 ? 'active': 'inActive']"
+        @click="addActivity('🏊'), changeColor('isActive4')"
       >
         <span role="img" aria-label="Swimer">🏊</span>
       </button>
-      <button type="button" @click="addActivity('☕'), $event.target.classList.toggle('activities')">
+      <button
+        type="button"
+        :class="[isActive5 ? 'active': 'inActive']"
+        @click="addActivity('☕'), changeColor('isActive5')"
+      >
         <span role="img" aria-label="Cup">☕</span>
       </button>
       <button
         type="button"
-        @click="addActivity('📖'), $event.target.classList.toggle('activities')"
+        :class="[isActive6 ? 'active': 'inActive']"
+        @click="addActivity('📖'), changeColor('isActive6')"
       >
         <span role="img" aria-label="Book">📖</span>
       </button>
       <button
         type="button"
-        @click="addActivity('🍏'), $event.target.classList.toggle('activities')"
+        :class="[isActive7 ? 'active': 'inActive']"
+        @click="addActivity('🍏'), changeColor('isActive7')"
       >
         <span role="img" aria-label="Apple">🍏</span>
       </button>
     </div>
     <div>
-      <input placeholder="Add Note...">
+      <input v-model="message" placeholder="Add Note...">
     </div>
-    <div>
+    <div class="check">
       <router-link to="/summary">
-        <button type="button">
+        <button type="button" v-on:click="inputvalue(message)">
           <span role="img" aria-label="Smile">✔️</span>
         </button>
       </router-link>
@@ -65,12 +75,37 @@ import { mapGetters } from "vuex";
 import { mapActions } from "vuex";
 export default {
   name: "AppMyActivities",
+  data() {
+    return {
+      message: "",
+      isActive1: JSON.parse(localStorage.getItem("isActive1")),
+      isActive2: JSON.parse(localStorage.getItem("isActive2")),
+      isActive3: JSON.parse(localStorage.getItem("isActive3")),
+      isActive4: JSON.parse(localStorage.getItem("isActive4")),
+      isActive5: JSON.parse(localStorage.getItem("isActive5")),
+      isActive6: JSON.parse(localStorage.getItem("isActive6")),
+      isActive7: JSON.parse(localStorage.getItem("isActive7"))
+    };
+  },
   methods: {
     ...mapActions({
-      addActivity2: "addActivity"
+      addActivity2: "addActivity",
+      inputvalue2: "inputvalue"
     }),
     addActivity(activityIcon) {
       this.addActivity2(activityIcon);
+    },
+    inputvalue(value) {
+      this.inputvalue2(value);
+    },
+    changeColor(event) {
+      if (this[event]) {
+        this[event] = false;
+        localStorage.setItem(event, this[event]);
+      } else {
+        this[event] = true;
+        localStorage.setItem(event, this[event]);
+      }
     }
   },
   computed: {
@@ -122,10 +157,19 @@ export default {
   }
   .mood span {
     font-size: 55px;
+    color: #ff5733;
+  }
+  .active {
+    color: #ff5733;
+  }
+  .inActive {
     color: #aeaaf0;
   }
-  .activities {
-    color: #ff5733;
+  .check span {
+    &:hover {
+      color: #ff5733;
+      transition: 400ms;
+    }
   }
 }
 </style>
